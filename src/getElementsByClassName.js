@@ -4,7 +4,22 @@
 // };
 
 // But instead we're going to implement it from scratch:
-var getElementsByClassName = function(className
-) {
+//base case: when there are no children check for class
+//recursive case: check the current node if it has that class then push into result array if it has that class
+//iterate through children calling getElements on each node
+var getElementsByClassName = function(className, currentNode) {
   // your code here
+  var result = [];
+  currentNode = currentNode || document.body;
+  if (currentNode.classList.contains(className)) {
+    result.push(currentNode);
+  }
+  // if (currentNode.children.length !== 0) {
+    for (var i = 0; i < currentNode.children.length; i++) {
+      result.concat(getElementsByClassName(className, currentNode.children.item(i)));
+    }
+  // }
+  console.log(result);
+  return result;
+  
 };
